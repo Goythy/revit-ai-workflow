@@ -18,6 +18,7 @@
   - [7. 启用 Revit 服务](#7-启用-revit-服务)
   - [8. 测试对话](#8-测试对话)
 - [常见问题](#-常见问题)
+- [命令集详解](#-命令集详解)
 
 ---
 
@@ -177,3 +178,36 @@ Cline 需要接入一个大模型 API 才能工作。以 **DeepSeek** 为例：
 - Revit 中的 MCP Switch 是否已开启（绿色状态）
 - MCP Server 路径配置是否正确
 - 网络连接是否正常（API 调用需要网络）
+
+### Q1: 点击 Revit MCP Switch 后按钮没有变绿？
+
+- **可能原因 1：** Visual Studio C++ 工具链未安装完整。
+- **解决方法：** 重新运行 Visual Studio Installer，修改安装，确保勾选 **“使用 C++ 的桌面开发”**。
+- **可能原因 2：** Revit 未以管理员权限运行。
+- **解决方法：** 关闭 Revit，右键点击 Revit 图标，选择 **“以管理员身份运行”**。
+
+### Q2: Cline 提示 “MCP server not found”？
+
+- **检查：** `cline_mcp_settings.json` 中的 `args` 路径是否正确。
+- **解决方法：** 在命令行中执行 `where.exe mcp-server-for-revit` 获取正确路径，复制粘贴到配置文件中。
+
+### Q3: 批量操作时 Revit 卡住了，怎么办？
+
+- **正常现象：** 处理大量元素（> 500 个）时，Revit 可能短暂无响应，代码仍在后台执行。
+- **解决方法：** 耐心等待，最终会弹出 TaskDialog 显示结果。
+- **判断：** 如果长时间（>5 分钟）无反应，参考 `rules/` 中的“超时诊断决策树”进行排查。
+
+---
+
+## 命令集详解
+## 📚 Revit-MCP 插件命令集概览
+
+| 分类 | 命令示例 | 功能说明 |
+| :--- | :--- | :--- |
+| **查询类** | `get_current_view_elements`、`get_selected_elements` | 查看模型信息、获取选中元素 |
+| **创建类** | `create_level`、`create_room`、`create_grid` | 自动生成标高、房间、轴网 |
+| **修改类** | `modify_element`、`operate_element` | 批量修改参数、操作元素 |
+| **命令类** | `delete_element`、`send_code_to_revit` | 删除元素、执行自定义 C# 代码 |
+| **视觉类** | `color_splash`、`tag_walls` | 着色显示、标注墙/房间 |
+
+> ⭐ **`send_code_to_revit`** 是最强大的工具，允许 AI 生成 C# 代码并在 Revit 中直接执行。AI 会自动基于固定模板生成代码，你只需描述需求即可。
