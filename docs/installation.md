@@ -69,10 +69,10 @@ Addins\2020
 ├── mcp-servers-for-revit.addin   ← 注意：只保留这一个 .addin 文件
 └── revit_mcp_plugin
     ├── revit-mcp-plugin.dll
-    └── Commands
-        └── RevitMCPCommandSet
-            └── 2020
-                └── RevitMCPCommandSet.dll
+    ├── Commands
+    |    └── RevitMCPCommandSet
+    |        └── 2020
+    |            └── RevitMCPCommandSet.dll
     └── ... (其他文件夹)
 ```
 
