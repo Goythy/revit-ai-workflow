@@ -82,6 +82,7 @@ Addins\2020
 ### 3. 安装 MCP Server
 
 MCP Server 是连接 AI 与 Revit 的桥梁，通过 `npm`（Node.js 包管理器）全局安装。
+如果node版本过高（如24），需要安装python辅助编译，否则会失败
 
 1. **确保已安装 Visual Studio**，并勾选了 “**使用 C++ 的桌面开发**” 组件。
 2. 打开命令提示符（Win + R，输入 `cmd`，回车）。
@@ -98,6 +99,12 @@ MCP Server 是连接 AI 与 Revit 的桥梁，通过 `npm`（Node.js 包管理�
    ```
 
    如果返回了文件路径（例如 `C:\Users\你的用户名\AppData\Roaming\npm\mcp-server-for-revit`），则表示安装成功。
+
+   保险起见还可以运行它，如果显示Revit MCP Server start success，则表示已经完成。使用ctrl+c退出
+
+   ```bash
+   mcp-server-for-revit
+   ```
 
 ### 4. 安装 VS Code 与 Cline
 
